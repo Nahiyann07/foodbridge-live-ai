@@ -9,3 +9,5 @@ build
 .npm-cache-x64
 .vinext
 .wrangler
+
+.vercel

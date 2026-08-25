@@ -2144,7 +2144,6 @@ footer p {
   }
 }
 
-`
         .auth-container {
           display: flex;
           align-items: center;
@@ -2228,4 +2227,3 @@ footer p {
           from { transform: rotate(0deg); }
           to { transform: rotate(360deg); }
         }
-      `
