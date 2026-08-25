@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { FoodBridgeApp } from "./FoodBridgeApp";
 
 export const metadata: Metadata = {
-  title: "FoodBridge Live AI | Team 1m1beeys",
+  title: "FoodBridge Live AI | NAHIYAN S",
   description:
     "Predict surplus, track it live, and coordinate safe food recovery before the collection window closes.",
   openGraph: {

@@ -14,6 +14,7 @@
     "db:generate": "drizzle-kit generate"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.112.4",
     "@tanstack/react-query": "^5.101.4",
     "drizzle-orm": "0.45.2",
     "leaflet": "^1.9.4",
@@ -42,5 +43,6 @@
     "vite": "8.0.13",
     "wrangler": "4.92.0"
   },
+  "author": "NAHIYAN S",
   "type": "module"
 }

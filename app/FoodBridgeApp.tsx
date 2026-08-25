@@ -5,6 +5,7 @@ import {
   QueryClientProvider,
   useQuery,
 } from "@tanstack/react-query";
+import { supabase } from "../lib/supabase";
 import {
   Activity,
   AlertTriangle,
@@ -712,7 +713,26 @@ function AppShell() {
   const [roleMenu, setRoleMenu] = useState(false);
   const [mobileMenu, setMobileMenu] = useState(false);
   const [toast, setToast] = useState("");
+  const [session, setSession] = useState<any>(null);
   const currentRole = roleOptions.find((item) => item.key === role)!;
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+      if (!session) window.location.href = "/auth";
+    });
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+      if (!session) window.location.href = "/auth";
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  if (!session) return null;
 
   const scenarioAction = useMemo(() => {
     if (scenario.step === 0) return "Service is active";
@@ -791,16 +811,15 @@ function AppShell() {
           <button className="icon-button" aria-label="Notifications"><Bell size={19} /><span className="notification-dot" /></button>
           <div className="role-switcher">
             <button onClick={() => setRoleMenu(!roleMenu)} aria-expanded={roleMenu}>
-              <span className="avatar">{currentRole.name.slice(0, 1)}</span>
-              <span className="role-copy"><small>Viewing as</small><b>{currentRole.label}</b></span>
+              <span className="avatar">{session?.user?.email?.slice(0, 1).toUpperCase()}</span>
+              <span className="role-copy"><small>Viewing as</small><b>{session?.user?.email}</b></span>
               <ChevronRight size={16} className={roleMenu ? "rotated" : ""} />
             </button>
             {roleMenu && (
               <div className="role-menu">
-                {roleOptions.map((option) => {
-                  const Icon = option.icon;
-                  return <button key={option.key} className={role === option.key ? "active" : ""} onClick={() => { setRole(option.key); setRoleMenu(false); notify(`${option.label} experience selected`); }}><Icon size={16} /><span><b>{option.label}</b><small>{option.name} • fictional</small></span>{role === option.key && <Check size={15} />}</button>;
-                })}
+                <button onClick={() => supabase.auth.signOut()}>
+                  <span><b>Sign Out</b></span>
+                </button>
               </div>
             )}
           </div>
@@ -811,7 +830,7 @@ function AppShell() {
         <div className="mobile-drawer" role="dialog" aria-modal="true" aria-label="Navigation menu">
           <div className="drawer-head"><div className="brand"><BrandMark /><span><b>FoodBridge</b><em>Live AI</em></span></div><button className="icon-button" onClick={() => setMobileMenu(false)} aria-label="Close navigation"><X size={20} /></button></div>
           {(["live", "matching", "pickup", "impact", "governance", "tools"] as ViewKey[]).map((view) => <button key={view} className={activeView === view ? "active" : ""} onClick={() => openView(view)}>{view === "live" ? "Live rescue" : view.charAt(0).toUpperCase() + view.slice(1)}<ChevronRight size={16} /></button>)}
-          <div className="drawer-team">Team <b>1m1beeys</b><small>Nahiyan S • Priyam Jay Debnath • Varun Raj S</small></div>
+          <div className="drawer-team">Created by <b>NAHIYAN S</b></div>
         </div>
       )}
 
@@ -836,9 +855,8 @@ function AppShell() {
       </main>
 
       <footer>
-        <div><BrandMark /><span><b>FoodBridge Live AI</b><small>A Team 1m1beeys project</small></span></div>
-        <p>All people, organisations, locations, accounts, and transactions shown are fictional demonstration data.</p>
-        <div className="footer-links"><button onClick={() => openView("governance")}>Responsible AI</button><button onClick={() => openView("tools")}>Prototype map</button></div>
+        <div><BrandMark /><span><b>FoodBridge Live AI</b><small>Created by NAHIYAN S</small></span></div>
+        <div className="footer-links"><button onClick={() => openView("governance")}>Responsible AI</button><button onClick={() => openView("tools")}>Workflows</button></div>
       </footer>
 
       <nav className="mobile-bottom-nav" aria-label="Mobile navigation">
