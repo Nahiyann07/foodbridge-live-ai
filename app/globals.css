@@ -2095,53 +2095,137 @@ footer p {
   }
 }
 
- @ m e d i a   ( m a x - w i d t h :   7 6 8 p x )   { 
-     . h e r o - g r i d ,   . d a s h b o a r d - g r i d ,   . s p l i t - v i e w ,   . i m p a c t - g r i d ,   . g o v e r n a n c e - g r i d   { 
-         g r i d - t e m p l a t e - c o l u m n s :   1 f r ; 
-     } 
-     . d e s k t o p - n a v   { 
-         d i s p l a y :   n o n e ; 
-     } 
-     . m o b i l e - m e n u - b u t t o n   { 
-         d i s p l a y :   i n l i n e - f l e x ; 
-     } 
-     . m o b i l e - b o t t o m - n a v   { 
-         d i s p l a y :   f l e x ; 
-         p o s i t i o n :   f i x e d ; 
-         b o t t o m :   0 ; 
-         l e f t :   0 ; 
-         r i g h t :   0 ; 
-         b a c k g r o u n d :   w h i t e ; 
-         b o r d e r - t o p :   1 p x   s o l i d   v a r ( - - l i n e ) ; 
-         j u s t i f y - c o n t e n t :   s p a c e - a r o u n d ; 
-         p a d d i n g :   1 0 p x   0 ; 
-         z - i n d e x :   1 0 0 0 ; 
-     } 
-     . m o b i l e - b o t t o m - n a v   b u t t o n   { 
-         d i s p l a y :   f l e x ; 
-         f l e x - d i r e c t i o n :   c o l u m n ; 
-         a l i g n - i t e m s :   c e n t e r ; 
-         g a p :   4 p x ; 
-         f o n t - s i z e :   1 0 p x ; 
-         c o l o r :   v a r ( - - m u t e d ) ; 
-         b a c k g r o u n d :   t r a n s p a r e n t ; 
-         b o r d e r :   n o n e ; 
-     } 
-     . m o b i l e - b o t t o m - n a v   b u t t o n . a c t i v e   { 
-         c o l o r :   v a r ( - - g r e e n ) ; 
-     } 
-     . t o p b a r   { 
-         p a d d i n g :   0   1 6 p x ; 
-     } 
-     . c o n t e n t   { 
-         p a d d i n g :   1 6 p x ; 
-     } 
-     f o o t e r   { 
-         p a d d i n g - b o t t o m :   7 0 p x ; 
-     } 
-     b u t t o n ,   i n p u t   { 
-         m i n - h e i g h t :   4 4 p x ;   / *   F i x   t o u c h   t a r g e t s   * / 
-     } 
- } 
-  
- 
+@media (max-width: 768px) {
+  .hero-grid, .dashboard-grid, .split-view, .impact-grid, .governance-grid {
+    grid-template-columns: 1fr;
+  }
+  .desktop-nav {
+    display: none;
+  }
+  .mobile-menu-button {
+    display: inline-flex;
+  }
+  .mobile-bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    border-top: 1px solid var(--line);
+    justify-content: space-around;
+    padding: 10px 0;
+    z-index: 1000;
+  }
+  .mobile-bottom-nav button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    color: var(--muted);
+    background: transparent;
+    border: none;
+  }
+  .mobile-bottom-nav button.active {
+    color: var(--green);
+  }
+  .topbar {
+    padding: 0 16px;
+  }
+  .content {
+    padding: 16px;
+  }
+  footer {
+    padding-bottom: 70px;
+  }
+  button, input {
+    min-height: 44px;
+  }
+}
+
+`
+        .auth-container {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          min-height: 100vh;
+          background: #f7f9f8;
+          padding: 1rem;
+        }
+        .auth-card {
+          background: white;
+          padding: 2.5rem 2rem;
+          border-radius: 16px;
+          box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+          width: 100%;
+          max-width: 420px;
+        }
+        h2 {
+          font-size: 1.5rem;
+          margin-bottom: 0.5rem;
+          text-align: center;
+        }
+        .auth-subtitle {
+          color: #6e7a73;
+          text-align: center;
+          margin-bottom: 2rem;
+          font-size: 0.95rem;
+        }
+        .auth-form {
+          display: flex;
+          flex-direction: column;
+          gap: 1.25rem;
+        }
+        .form-group {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+        label {
+          font-size: 0.875rem;
+          font-weight: 500;
+          color: #3b4540;
+        }
+        .form-input {
+          padding: 0.75rem 1rem;
+          border: 1px solid #dfe7df;
+          border-radius: 8px;
+          font-size: 1rem;
+          transition: border-color 0.2s;
+        }
+        .form-input:focus {
+          outline: none;
+          border-color: #23a677;
+        }
+        .alert {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          padding: 0.75rem;
+          border-radius: 8px;
+          margin-bottom: 1.5rem;
+          font-size: 0.875rem;
+        }
+        .alert.error {
+          background: #fef2f2;
+          color: #dc2626;
+          border: 1px solid #fecaca;
+        }
+        .alert.success {
+          background: #f0fdf4;
+          color: #16a34a;
+          border: 1px solid #bbf7d0;
+        }
+        .auth-switch {
+          margin-top: 1.5rem;
+          text-align: center;
+        }
+        .animate-spin {
+          animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+      `

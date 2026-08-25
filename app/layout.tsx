@@ -13,7 +13,7 @@ const displayFont = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "FoodBridge Live AI | Team 1m1beeys",
+  title: "FoodBridge Live AI",
   description: "A live, AI-assisted food-recovery coordination prototype.",
   icons: {
     icon: "/favicon.svg",
