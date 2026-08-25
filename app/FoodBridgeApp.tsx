@@ -732,9 +732,6 @@ function AppShell() {
 
     return () => subscription.unsubscribe();
   }, []);
-
-  if (!session) return null;
-
   const scenarioAction = useMemo(() => {
     if (scenario.step === 0) return "Service is active";
     if (scenario.step === 1) return "22 portions served";
@@ -787,6 +784,8 @@ function AppShell() {
       notify("Demo link copied");
     }
   }
+
+  if (!session) return null;
 
   return (
     <div className="app-shell">
