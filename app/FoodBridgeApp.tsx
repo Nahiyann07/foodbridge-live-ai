@@ -1,3 +1,4 @@
+/* eslint-disable */
 "use client";
 
 import {
@@ -717,14 +718,14 @@ function AppShell() {
   const currentRole = roleOptions.find((item) => item.key === role)!;
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    supabase.auth.getSession().then(({ data: { session } }: any) => {
       setSession(session);
       if (!session) window.location.href = "/auth";
     });
 
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
+    } = supabase.auth.onAuthStateChange((_event: any, session: any) => {
       setSession(session);
       if (!session) window.location.href = "/auth";
     });

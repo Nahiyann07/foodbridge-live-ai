@@ -7,8 +7,8 @@
   },
   "scripts": {
     "dev": "vinext dev --host 127.0.0.1 --port 5173",
-    "build": "vinext build",
-    "start": "vinext start",
+    "build": "next build",
+    "start": "next start",
     "test": "npm run build && node --test tests/rendered-html.test.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "db:generate": "drizzle-kit generate"
